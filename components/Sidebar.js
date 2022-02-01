@@ -13,7 +13,7 @@ const Sidebar = () => {
   // const { data: session, status } = useSession()
   // console.log(session)
   return (
-    <div className="border-r border-gray-900 p-5 text-sm text-gray-500">
+    <div className="h-screen overflow-y-scroll border-r border-gray-900 p-5 text-sm text-gray-500 scrollbar-hide">
       <div className="space-y-4">
         <button
           onClick={() => signOut()}
@@ -49,7 +49,6 @@ const Sidebar = () => {
         </button>
         <hr className="border-t-[0.1px] border-gray-900" />
         {/* Playlists */}
-        <p className="cursor-pointer hover:text-white">Playlist name.</p>
         <p className="cursor-pointer hover:text-white">Playlist name.</p>
         <p className="cursor-pointer hover:text-white">Playlist name.</p>
         <p className="cursor-pointer hover:text-white">Playlist name.</p>
