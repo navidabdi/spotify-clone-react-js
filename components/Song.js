@@ -14,9 +14,9 @@ const Song = ({ order, track }) => {
   const playSong = () => {
     setCurrentTrackId(track.track.id)
     setIsPlaying(true)
-    spotifyApi.play({
-      uris: [track.track.uri],
-    })
+    // spotifyApi.play({
+    //   uris: [track.track.uri],
+    // })
   }
 
   return (
@@ -27,7 +27,7 @@ const Song = ({ order, track }) => {
       <div className="flex items-center space-x-4">
         <p>{order + 1}</p>
         <img
-          src={track.track.album.images[0].url}
+          src={track.track.album.images[0]?.url}
           className="h-10 w-10"
           alt={track.track.name}
         />
