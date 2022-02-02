@@ -22,7 +22,8 @@ const Song = ({ order, track }) => {
   return (
     <div
       onClick={playSong}
-      className="grid cursor-pointer grid-cols-2 rounded-md py-2 px-5 text-gray-500 hover:bg-gray-900"
+      className={`ease delay-50 grid cursor-pointer grid-cols-2 rounded-md py-2 px-5 text-gray-500 transition hover:bg-gray-900
+       ${currentTrackId == track.track.id ? 'active-track' : ''}`}
     >
       <div className="flex items-center space-x-4">
         <p>{order + 1}</p>

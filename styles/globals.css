@@ -52,3 +52,6 @@
 .vulome-input::-webkit-slider-runnable-track {
   margin-top: -25px;
 }
+.active-track {
+  background-color: rgb(35, 46, 70);
+}

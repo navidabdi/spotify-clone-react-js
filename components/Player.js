@@ -138,16 +138,22 @@ const Player = () => {
           <NextIcon className="button" />
           <RepeatIcon className="button" />
         </div>
-        <div className="track w-full">
-          <input
-            value={Math.floor(songInfo?.duration_ms / 1000)}
-            // onChange={(e) => setVolume(Number(e.target.value))}
-            className="time-control w-full"
-            type="range"
-            min="0"
-            max="100"
-          />
-          <div className="animate-track"></div>
+        <div className="flex items-center space-x-3">
+          <p className="text-xs text-[#b3b3b3]">0:00</p>
+          <div className="track w-full">
+            <input
+              value={Math.floor(songInfo?.duration_ms / 1000)}
+              // onChange={(e) => setVolume(Number(e.target.value))}
+              className="time-control w-full"
+              type="range"
+              min="0"
+              max="100"
+            />
+            <div className="animate-track"></div>
+          </div>
+          <p className="text-xs text-[#b3b3b3]">
+            {millisTime(songInfo?.duration_ms)}
+          </p>
         </div>
       </div>
 
