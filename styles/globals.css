@@ -4,6 +4,12 @@
 
 @layer components {
   .button {
-    @apply h-5 w-5 transform cursor-pointer transition duration-200 ease-out hover:scale-125;
+    @apply h-4 w-4 transform cursor-pointer fill-[#b3b3b3] transition duration-200 ease-out hover:fill-white;
+  }
+  .playbtn {
+    @apply flex h-8 w-8 items-center justify-center rounded-full bg-white transition duration-200 ease-out hover:scale-110;
+  }
+  .text-color-1 {
+    @apply text-[#b3b3b3];
   }
 }

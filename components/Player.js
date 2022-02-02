@@ -4,19 +4,21 @@ import { useRecoilState } from 'recoil'
 import { currentTrackIdState, isPlayingState } from '../atoms/songAtom'
 import useSongInfo from '../hooks/useSongInfo'
 import { useCallback, useEffect, useState } from 'react'
+
 import {
-  ReplyIcon,
-  SwitchHorizontalIcon,
-  VolumeUpIcon as VolumeDownIcon,
-} from '@heroicons/react/outline'
-import {
+  NextIcon,
+  PrevIcon,
+  RepeatIcon,
   PlayIcon,
   PauseIcon,
-  RewindIcon,
-  FastForwardIcon,
-  VolumeUpIcon,
-} from '@heroicons/react/solid'
+  ShuffleIcon,
+} from './SpotifyIcons'
+
+import { VolumeUpIcon as VolumeDownIcon } from '@heroicons/react/outline'
+import { VolumeUpIcon } from '@heroicons/react/solid'
 import { debounce } from 'lodash'
+import { vulomeState } from '../atoms/vulomeAtom'
+import VulomeIcon from './VulomeIcon'
 
 const Player = () => {
   const spotifyApi = useSpotify()
@@ -26,7 +28,7 @@ const Player = () => {
     useRecoilState(currentTrackIdState)
   const [isPlaying, setIsPlaying] = useRecoilState(isPlayingState)
 
-  const [volume, setVolume] = useState(100)
+  const [volume, setVolume] = useRecoilState(vulomeState)
 
   const songInfo = useSongInfo()
 
@@ -43,6 +45,7 @@ const Player = () => {
   }
 
   const playPuseHandler = () => {
+    console.log('its working')
     spotifyApi.getMyCurrentPlaybackState().then((data) => {
       if (data.body.is_playing) {
         spotifyApi.pause()
@@ -77,38 +80,61 @@ const Player = () => {
   )
 
   return (
-    <div className="grid h-24 grid-cols-3 border-t border-[#282828] bg-[#181818] px-2 text-xs text-white md:text-base">
+    <div className="grid h-20 grid-flow-row-dense grid-cols-3 border-t border-[#282828] bg-[#181818] px-2 text-xs text-white md:text-base">
       {/* Left */}
+      {console.log(songInfo)}
       <div className="flex items-center space-x-4">
         <img
-          className="hidden h-10 w-10 md:inline"
+          className="hidden h-14 w-14 md:inline"
           src={songInfo?.album.images?.[0].url}
           alt=""
         />
         <div>
-          <h3>{songInfo?.name}</h3>
-          <p>{songInfo?.artists?.[0]?.name}</p>
+          <h3 className="w-32 truncate md:w-40 lg:w-60">{songInfo?.name}</h3>
+          <p className="text-color-1 mt-[-.2rem] text-[.75rem] font-light">
+            {songInfo?.artists?.[0]?.name}
+          </p>
         </div>
       </div>
       {/* Center */}
-      <div className="flex items-center justify-evenly">
-        <SwitchHorizontalIcon className="button" />
-        <RewindIcon className="button" />
+      <div className="col-span-2 flex items-center justify-center space-x-5 md:col-span-1">
+        <ShuffleIcon className="button" />
+        <PrevIcon className="button" />
         {isPlaying ? (
-          <PauseIcon onClick={playPuseHandler} className="button h-10 w-10" />
+          <div className="playbtn">
+            <svg
+              onClick={playPuseHandler}
+              className="button scale-105 fill-black hover:fill-black"
+              role="img"
+              height="16"
+              width="16"
+              viewBox="0 0 16 16"
+            >
+              <path fill="none" d="M0 0h16v16H0z"></path>
+              <path d="M3 2h3v12H3zm7 0h3v12h-3z"></path>
+            </svg>
+          </div>
         ) : (
-          <PlayIcon onClick={playPuseHandler} className="button h-10 w-10" />
+          <div className="playbtn">
+            <svg
+              onClick={playPuseHandler}
+              className="button fill-black hover:fill-black"
+              role="img"
+              height="16"
+              width="16"
+              viewBox="0 0 16 16"
+            >
+              <path d="M4.018 14L14.41 8 4.018 2z"></path>
+            </svg>
+          </div>
         )}
 
-        <FastForwardIcon className="button" />
-        <ReplyIcon className="button" />
+        <NextIcon className="button" />
+        <RepeatIcon className="button" />
       </div>
       {/* Right */}
-      <div className="flex items-center justify-end space-x-3 pr-5 md:space-x-4">
-        <VolumeDownIcon
-          className="button"
-          onClick={() => volume > 0 && setVolume(volume - 10)}
-        />
+      <div className="hidden items-center justify-end space-x-3 pr-5 md:flex md:space-x-4">
+        <VulomeIcon />
         <input
           value={volume}
           onChange={(e) => setVolume(Number(e.target.value))}
@@ -116,10 +142,6 @@ const Player = () => {
           type="range"
           min="0"
           max="100"
-        />
-        <VolumeUpIcon
-          onClick={() => volume < 100 && setVolume(volume + 10)}
-          className="button"
         />
       </div>
     </div>
