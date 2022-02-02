@@ -59,35 +59,41 @@ const Main = () => {
   }, [spotifyApi, playlistId])
   return (
     <div className="h-screen flex-grow overflow-y-scroll scrollbar-hide">
-      <header className="absolute top-5 right-8">
-        <div
-          onClick={() => signOut()}
-          className="flex cursor-pointer items-center space-x-3 rounded-full bg-black p-1 pr-2 text-white opacity-90 hover:opacity-80"
+      <div className="relative">
+        <header className="absolute top-5 right-5">
+          <div
+            onClick={() => signOut()}
+            className="flex cursor-pointer items-center space-x-3 rounded-full bg-black p-1 pr-2 text-white opacity-90 hover:opacity-80"
+          >
+            <img
+              className="h-7 w-7 rounded-full"
+              src={session?.user.image}
+              alt={session?.user.name}
+            />
+            <h3 className="">{session?.user.name}</h3>
+            <ChevronDownIcon className="h-5 w-5" />
+          </div>
+        </header>
+        <section
+          className={`item-end flex space-x-7 bg-gradient-to-b py-20 ${color} to-black p-8 text-white`}
         >
-          <img
-            className="h-10 w-10 rounded-full"
-            src={session?.user.image}
-            alt={session?.user.name}
-          />
-          <h3 className="">{session?.user.name}</h3>
-          <ChevronDownIcon className="h-5 w-5" />
-        </div>
-      </header>
-      <section
-        className={`item-end flex h-80 space-x-7 bg-gradient-to-b ${color} to-black p-8 text-white`}
-      >
-        <img
-          className="h-44 w-44 object-cover shadow-2xl"
-          src={playlist?.images?.[0]?.url}
-          alt=""
-        />
-        <div>
-          <p>PLAYLIST</p>
-          <h1 className="text-2xl font-bold md:text-3xl xl:text-5xl">
-            {playlist?.name}
-          </h1>
-        </div>
-      </section>
+          <div className="flex flex-col space-x-3 md:flex-row">
+            <img
+              className="h-44 w-44 object-cover shadow-2xl"
+              src={playlist?.images?.[0]?.url}
+              alt=""
+            />
+            <div className="mt-3 flex flex-col space-y-2 self-end md:mt-0 md:space-y-5">
+              <p className="text-sm font-bold opacity-70">PLAYLIST</p>
+              <h1 className="text-2xl font-bold md:text-3xl xl:text-5xl">
+                {playlist?.name}
+                {console.log(playlist)}
+              </h1>
+              <p className="text-sm">{playlist?.description}</p>
+            </div>
+          </div>
+        </section>
+      </div>
       <div>
         <Songs />
       </div>

@@ -46,7 +46,6 @@ const Player = () => {
   }
 
   const playPuseHandler = () => {
-    console.log('its working')
     spotifyApi.getMyCurrentPlaybackState().then((data) => {
       if (data.body.is_playing) {
         spotifyApi.pause()
@@ -86,10 +85,9 @@ const Player = () => {
   return (
     <div className="grid h-24 grid-flow-row-dense grid-cols-3 items-center border-t border-[#282828] bg-[#181818] px-10 text-xs text-white md:px-4 md:text-base">
       {/* Left */}
-      {console.log(songInfo)}
       <div className="hidden items-center space-x-4 md:flex">
         <img
-          className=" h-14 w-14 "
+          className="h-14 w-14 rounded-sm"
           src={songInfo?.album.images?.[0].url}
           alt=""
         />

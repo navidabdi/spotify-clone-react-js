@@ -26,16 +26,16 @@ const Song = ({ order, track }) => {
        ${currentTrackId == track.track.id ? 'active-track' : ''}`}
     >
       <div className="flex items-center space-x-4">
-        <p>{order + 1}</p>
+        <p className="w-5">{order + 1}</p>
         <img
           src={track.track.album.images[0]?.url}
-          className="h-10 w-10"
+          className="h-10 w-10 rounded-sm"
           alt={track.track.name}
         />
 
         <div>
           <p className="w-36 truncate text-white lg:w-64">{track.track.name}</p>
-          <p className="mt-[-.2rem] w-40 text-sm">
+          <p className="mt-[-.2rem] w-40 truncate text-sm">
             {track.track.artists[0].name}
           </p>
         </div>
