@@ -19,6 +19,7 @@ import { VolumeUpIcon } from '@heroicons/react/solid'
 import { debounce } from 'lodash'
 import { vulomeState } from '../atoms/vulomeAtom'
 import VulomeIcon from './VulomeIcon'
+import { millisTime } from '../lib/time'
 
 const Player = () => {
   const spotifyApi = useSpotify()
@@ -78,14 +79,17 @@ const Player = () => {
     }, 500),
     []
   )
-
+  //   Add The Styles
+  const trackAnimate = {
+    transform: `translateX(${volume}%)`,
+  }
   return (
-    <div className="grid h-20 grid-flow-row-dense grid-cols-3 border-t border-[#282828] bg-[#181818] px-2 text-xs text-white md:text-base">
+    <div className="grid h-24 grid-flow-row-dense grid-cols-3 items-center border-t border-[#282828] bg-[#181818] px-10 text-xs text-white md:px-4 md:text-base">
       {/* Left */}
       {console.log(songInfo)}
-      <div className="flex items-center space-x-4">
+      <div className="hidden items-center space-x-4 md:flex">
         <img
-          className="hidden h-14 w-14 md:inline"
+          className=" h-14 w-14 "
           src={songInfo?.album.images?.[0].url}
           alt=""
         />
@@ -96,53 +100,72 @@ const Player = () => {
           </p>
         </div>
       </div>
-      {/* Center */}
-      <div className="col-span-2 flex items-center justify-center space-x-5 md:col-span-1">
-        <ShuffleIcon className="button" />
-        <PrevIcon className="button" />
-        {isPlaying ? (
-          <div className="playbtn">
-            <svg
-              onClick={playPuseHandler}
-              className="button scale-105 fill-black hover:fill-black"
-              role="img"
-              height="16"
-              width="16"
-              viewBox="0 0 16 16"
-            >
-              <path fill="none" d="M0 0h16v16H0z"></path>
-              <path d="M3 2h3v12H3zm7 0h3v12h-3z"></path>
-            </svg>
-          </div>
-        ) : (
-          <div className="playbtn">
-            <svg
-              onClick={playPuseHandler}
-              className="button fill-black hover:fill-black"
-              role="img"
-              height="16"
-              width="16"
-              viewBox="0 0 16 16"
-            >
-              <path d="M4.018 14L14.41 8 4.018 2z"></path>
-            </svg>
-          </div>
-        )}
 
-        <NextIcon className="button" />
-        <RepeatIcon className="button" />
+      {/* Center */}
+      <div className="col-span-3 space-y-3 md:col-span-1">
+        <div className=" flex items-center justify-center space-x-5 ">
+          <ShuffleIcon className="button" />
+          <PrevIcon className="button" />
+          {isPlaying ? (
+            <div className="playbtn">
+              <svg
+                onClick={playPuseHandler}
+                className="button scale-105 fill-black hover:fill-black"
+                role="img"
+                height="16"
+                width="16"
+                viewBox="0 0 16 16"
+              >
+                <path fill="none" d="M0 0h16v16H0z"></path>
+                <path d="M3 2h3v12H3zm7 0h3v12h-3z"></path>
+              </svg>
+            </div>
+          ) : (
+            <div className="playbtn">
+              <svg
+                onClick={playPuseHandler}
+                className="button fill-black hover:fill-black"
+                role="img"
+                height="16"
+                width="16"
+                viewBox="0 0 16 16"
+              >
+                <path d="M4.018 14L14.41 8 4.018 2z"></path>
+              </svg>
+            </div>
+          )}
+
+          <NextIcon className="button" />
+          <RepeatIcon className="button" />
+        </div>
+        <div className="track w-full">
+          <input
+            value={Math.floor(songInfo?.duration_ms / 1000)}
+            // onChange={(e) => setVolume(Number(e.target.value))}
+            className="time-control w-full"
+            type="range"
+            min="0"
+            max="100"
+          />
+          <div className="animate-track"></div>
+        </div>
       </div>
+
       {/* Right */}
-      <div className="hidden items-center justify-end space-x-3 pr-5 md:flex md:space-x-4">
+
+      <div className="hidden items-center justify-end space-x-3 md:flex md:space-x-4">
         <VulomeIcon />
-        <input
-          value={volume}
-          onChange={(e) => setVolume(Number(e.target.value))}
-          className="w-14 md:w-20"
-          type="range"
-          min="0"
-          max="100"
-        />
+        <div className="track w-28">
+          <input
+            value={volume}
+            onChange={(e) => setVolume(Number(e.target.value))}
+            className="vulome-input w-full"
+            type="range"
+            min="0"
+            max="100"
+          />
+          <div className="animate-track" style={trackAnimate}></div>
+        </div>
       </div>
     </div>
   )
