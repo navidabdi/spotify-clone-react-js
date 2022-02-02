@@ -6,12 +6,12 @@ import Sidebar from '../components/Sidebar'
 
 export default function Home() {
   return (
-    <div className="h-screen overflow-hidden bg-black">
+    <div className="h-screen overflow-hidden bg-[#121212]">
       <main className="flex">
         <Sidebar />
         <Main />
       </main>
-      <div className="sticky bottom-0">
+      <div className="sticky bottom-0 z-20">
         <Player />
       </div>
     </div>

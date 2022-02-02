@@ -22,7 +22,7 @@ const Song = ({ order, track }) => {
   return (
     <div
       onClick={playSong}
-      className={`ease delay-50 grid cursor-pointer grid-cols-2 rounded-md py-2 px-5 text-gray-500 transition hover:bg-gray-900
+      className={`ease delay-50 grid cursor-pointer grid-cols-2 rounded-md py-2 px-5 text-gray-500 transition hover:bg-[#1e1e20]
        ${currentTrackId == track.track.id ? 'active-track' : ''}`}
     >
       <div className="flex items-center space-x-4">
@@ -44,7 +44,7 @@ const Song = ({ order, track }) => {
         <p className="hidden w-40 truncate md:inline">
           {track.track.album.name}
         </p>
-        <p>{millisTime(track.track.duration_ms)}</p>
+        <p className="hidden sm:block">{millisTime(track.track.duration_ms)}</p>
       </div>
     </div>
   )

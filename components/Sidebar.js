@@ -12,11 +12,13 @@ import {
   SearchIcon,
   SpotifyLogo,
 } from './SpotifyIcons'
+import { sidebarTrigerAtom } from '../atoms/sidebarTrigerAtom'
 
 const Sidebar = () => {
   const { data: session, status } = useSession()
   const [playlists, setPlaylists] = useState([])
   const [playlistId, setPlaylistId] = useRecoilState(playlistIdState)
+  const [sidebarTriger, setSidebarTriger] = useRecoilState(sidebarTrigerAtom)
   const spotifyApi = useSpotify()
 
   useEffect(() => {
@@ -28,12 +30,16 @@ const Sidebar = () => {
   }, [session, spotifyApi])
 
   return (
-    <div className="hidden h-screen overflow-y-scroll bg-black  p-5 text-xs text-gray-500 scrollbar-hide sm:w-[12rem] md:inline-flex lg:w-[15rem] lg:text-sm">
+    <div
+      className={`absolute top-0 left-0 z-10 h-screen w-[180px] translate-x-[-100%] overflow-y-scroll bg-black p-5  text-xs text-gray-500 transition-all delay-200 ease-out scrollbar-hide md:inline-flex md:w-[250px] md:translate-x-[0] lg:text-sm ${
+        sidebarTriger ? 'translate-x-[0]' : ''
+      }`}
+    >
       <div className="space-y-4">
         <a className="block w-32 py-2" href="/">
           <SpotifyLogo />
         </a>
-        <ul>
+        <ul className="text-sm md:text-base">
           <li className="listWithIcon">
             <a className="listWithIconLink" href="#">
               <HomeIcon />

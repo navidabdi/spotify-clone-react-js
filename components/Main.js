@@ -6,6 +6,8 @@ import { useRecoilState, useRecoilValue } from 'recoil'
 import { playlistState, playlistIdState } from '../atoms/playlistAtom'
 import useSpotify from '../hooks/useSpotify'
 import Songs from './Songs'
+import { MenuBarIcon } from './SpotifyIcons'
+import { sidebarTrigerAtom } from '../atoms/sidebarTrigerAtom'
 
 const Main = () => {
   const { data: session } = useSession()
@@ -43,6 +45,7 @@ const Main = () => {
   const playlistId = useRecoilValue(playlistIdState)
 
   const [playlist, setPlaylist] = useRecoilState(playlistState)
+  const [sidebarTriger, setSidebarTriger] = useRecoilState(sidebarTrigerAtom)
   const spotifyApi = useSpotify()
 
   useEffect(() => {
@@ -57,9 +60,20 @@ const Main = () => {
       })
       .catch((err) => console.log('Somting went wrong!', err))
   }, [spotifyApi, playlistId])
+
   return (
-    <div className="h-screen flex-grow overflow-y-scroll scrollbar-hide">
+    <div
+      className={` h-screen w-[80%] flex-grow overflow-y-scroll transition-all delay-200 ease-out scrollbar-hide md:ml-[250px] ${
+        sidebarTriger ? 'ml-[180px]' : 'ml-0'
+      }`}
+    >
       <div className="relative">
+        <button
+          onClick={() => setSidebarTriger(!sidebarTriger)}
+          className="absolute top-5 left-8 flex h-[23px] flex-col justify-between  md:hidden"
+        >
+          <MenuBarIcon />
+        </button>
         <header className="absolute top-5 right-5">
           <div
             onClick={() => signOut()}
@@ -75,21 +89,21 @@ const Main = () => {
           </div>
         </header>
         <section
-          className={`item-end flex space-x-7 bg-gradient-to-b py-20 ${color} to-black p-8 text-white`}
+          className={`item-end flex space-x-7 bg-gradient-to-b py-20 ${color} to-[#121212] p-8 text-white`}
         >
           <div className="flex flex-col space-x-3 md:flex-row">
             <img
-              className="h-44 w-44 object-cover shadow-2xl"
+              className="h-52 w-52 object-cover shadow-2xl"
               src={playlist?.images?.[0]?.url}
               alt=""
             />
-            <div className="mt-3 flex flex-col space-y-2 self-end md:mt-0 md:space-y-5">
+            <div className="mt-3 flex flex-col space-y-2 md:mt-0 md:space-y-5 md:self-end">
               <p className="text-sm font-bold opacity-70">PLAYLIST</p>
-              <h1 className="text-2xl font-bold md:text-3xl xl:text-5xl">
+              <h1 className="text-2xl font-bold md:text-3xl xl:text-6xl">
                 {playlist?.name}
                 {console.log(playlist)}
               </h1>
-              <p className="text-sm">{playlist?.description}</p>
+              <p className="text-md opacity-75">{playlist?.description}</p>
             </div>
           </div>
         </section>
