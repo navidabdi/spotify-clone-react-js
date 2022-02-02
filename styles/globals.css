@@ -12,6 +12,15 @@
   .text-color-1 {
     @apply text-[#b3b3b3];
   }
+  .listWithIcon {
+    @apply py-2 opacity-70 transition-all delay-75 ease-in hover:opacity-100;
+  }
+  .listWithIconLink {
+    @apply flex items-center space-x-3;
+  }
+  .listWithIconSpan {
+    @apply text-[1rem] font-[500] text-white;
+  }
 }
 .track {
   background: #b3b3b3;

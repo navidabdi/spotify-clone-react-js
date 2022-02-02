@@ -35,7 +35,9 @@ const Song = ({ order, track }) => {
 
         <div>
           <p className="w-36 truncate text-white lg:w-64">{track.track.name}</p>
-          <p className="w-40">{track.track.artists[0].name}</p>
+          <p className="mt-[-.2rem] w-40 text-sm">
+            {track.track.artists[0].name}
+          </p>
         </div>
       </div>
       <div className="ml-auto flex items-center justify-between md:ml-0">
