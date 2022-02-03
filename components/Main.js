@@ -101,7 +101,6 @@ const Main = () => {
               <p className="text-sm font-bold opacity-70">PLAYLIST</p>
               <h1 className="text-2xl font-bold md:text-3xl xl:text-6xl">
                 {playlist?.name}
-                {console.log(playlist)}
               </h1>
               <p className="text-md opacity-75">{playlist?.description}</p>
             </div>

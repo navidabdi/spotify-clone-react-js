@@ -140,7 +140,7 @@ const Player = () => {
           <p className="text-xs text-[#b3b3b3]">0:00</p>
           <div className="track w-full">
             <input
-              value={Math.floor(songInfo?.duration_ms / 1000)}
+              // value={Math.floor(songInfo?.duration_ms / 1000)}
               // onChange={(e) => setVolume(Number(e.target.value))}
               className="time-control w-full"
               type="range"
@@ -150,7 +150,7 @@ const Player = () => {
             <div className="animate-track"></div>
           </div>
           <p className="text-xs text-[#b3b3b3]">
-            {millisTime(songInfo?.duration_ms)}
+            {millisTime(songInfo?.duration_ms ?? 0)}
           </p>
         </div>
       </div>

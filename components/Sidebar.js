@@ -13,7 +13,7 @@ import {
   SpotifyLogo,
 } from './SpotifyIcons'
 import { sidebarTrigerAtom } from '../atoms/sidebarTrigerAtom'
-
+import Link from 'next/link'
 const Sidebar = () => {
   const { data: session, status } = useSession()
   const [playlists, setPlaylists] = useState([])
@@ -36,16 +36,18 @@ const Sidebar = () => {
       }`}
     >
       <div className="space-y-4">
-        <a className="block w-32 py-2" href="/">
-          <SpotifyLogo />
-        </a>
+        <Link href="/">
+          <a className="block w-32 py-2">
+            <SpotifyLogo />
+          </a>
+        </Link>
         <ul className="text-sm md:text-base">
-          <li className="listWithIcon">
-            <a className="listWithIconLink" href="#">
+          <Link href="/home/albums" className="listWithIcon">
+            <a className="listWithIconLink">
               <HomeIcon />
               <span className="listWithIconSpan">Home</span>
             </a>
-          </li>
+          </Link>
           <li className="listWithIcon">
             <a className="listWithIconLink" href="#">
               <SearchIcon />
