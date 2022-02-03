@@ -42,35 +42,45 @@ const Sidebar = () => {
           </a>
         </Link>
         <ul className="text-sm md:text-base">
-          <Link href="/home/albums" className="listWithIcon">
-            <a className="listWithIconLink">
-              <HomeIcon />
-              <span className="listWithIconSpan">Home</span>
-            </a>
-          </Link>
           <li className="listWithIcon">
-            <a className="listWithIconLink" href="#">
-              <SearchIcon />
-              <span className="listWithIconSpan">Search</span>
-            </a>
+            <Link href="/albums">
+              <a className="listWithIconLink">
+                <HomeIcon />
+                <span className="listWithIconSpan">Home</span>
+              </a>
+            </Link>
           </li>
           <li className="listWithIcon">
-            <a className="listWithIconLink" href="#">
-              <LibraryIcon />
-              <span className="listWithIconSpan">Your Library</span>
-            </a>
+            <Link href="/">
+              <a className="listWithIconLink" href="#">
+                <SearchIcon />
+                <span className="listWithIconSpan">Search</span>
+              </a>
+            </Link>
+          </li>
+          <li className="listWithIcon">
+            <Link href="/">
+              <a className="listWithIconLink" href="#">
+                <LibraryIcon />
+                <span className="listWithIconSpan">Your Library</span>
+              </a>
+            </Link>
           </li>
           <li className="listWithIcon mt-7">
-            <a className="listWithIconLink" href="#">
-              <AddIcon />
-              <span className="listWithIconSpan">Create Playlist</span>
-            </a>
+            <Link href="/">
+              <a className="listWithIconLink" href="#">
+                <AddIcon />
+                <span className="listWithIconSpan">Create Playlist</span>
+              </a>
+            </Link>
           </li>
           <li className="listWithIcon">
-            <a className="listWithIconLink" href="#">
-              <HeartIcon />
-              <span className="listWithIconSpan">Liked Songs</span>
-            </a>
+            <Link href="/">
+              <a className="listWithIconLink" href="#">
+                <HeartIcon />
+                <span className="listWithIconSpan">Liked Songs</span>
+              </a>
+            </Link>
           </li>
         </ul>
         <hr className="border-t-[0.1px] border-[#282828]" />

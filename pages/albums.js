@@ -1,14 +1,9 @@
-import { useSession } from 'next-auth/react'
-import { useRecoilState } from 'recoil'
-import { AlbumsState } from '../../atoms/albumsAtom'
-import useAlbums from '../../hooks/useAlbums'
 import React from 'react'
-import Sidebar from '../../components/Sidebar'
+import Sidebar from '../components/Sidebar'
 import { useRecoilValue } from 'recoil'
-
-import Player from '../../components/Player'
-import MyAlbums from '../../components/MyAlbums'
-import { sidebarTrigerAtom } from '../../atoms/sidebarTrigerAtom'
+import Player from '../components/Player'
+import MyAlbums from '../components/MyAlbums'
+import { sidebarTrigerAtom } from '../atoms/sidebarTrigerAtom'
 const Albums = () => {
   const sidebarTriger = useRecoilValue(sidebarTrigerAtom)
   return (

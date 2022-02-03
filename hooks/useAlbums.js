@@ -10,7 +10,7 @@ const useAlbums = () => {
     const fetchAlbums = async () => {
       try {
         const Album = await fetch(
-          `https://api.spotify.com/v1/me/albums?offset=0&limit=5`,
+          `https://api.spotify.com/v1/me/albums?offset=0&limit=20`,
           {
             headers: {
               Authorization: `Bearer ${spotifyApi.getAccessToken()}`,
